@@ -1,0 +1,149 @@
+-------------------------------------------------------- Maths --------------------------------------------------------------
+- Factorial of large number
+
+- Count Digits [Math.log10(num) + 1]
+
+- Palindrome 
+	String, Array [Two pointer]
+	Number 	rev = rev *10 + temp%10;
+
+
+- factorial trailing zeros
+	Concept - can be calculated by adding no. of 2s and 5s pair-wise (2*5 = 10 --> one zero) in the prime factorization of a number n... and because, no. of 5s < no. of 2s in the prime factorization,  we're counting no. of 5s
+	[n/5] + [n/25] + [n/125] + ….   [] - floor
+	for(int i=5; i<=n; i=i*5) {
+		zero = zero + n/i;
+	}
+
+
+
+- GCD
+	Euclidean extended 
+		 if(b==0)
+			return 0;
+		else
+			return gcd(b, a%b);
+- LCM
+	(a*b)/gcd(a,b)
+
+
+- Check for prime (i*i<=n)
+	
+- Sieve of Eratosthenes
+	 public static boolean[] sieveOfEratosthenes(int n) {
+        	boolean[] prime = new boolean[n + 1];
+        	Arrays.fill(prime, true);
+        
+        	for (int i = 2; i * i <= n; i++) {
+            		if (prime[i]) {
+                		for (int j = i * i; j <= n; j += i) {
+                    			prime[j] = false;
+                		}
+            		}
+        	}
+        
+        	return prime;
+    	}
+
+- Factors
+	static void allDivisors(int n) {
+		int i;
+		for (i = 1; i*i<=n; i++) {
+			if(n%i==0) 
+				System.out.print(i + " ");			
+		}
+		for(; i>=1; i--) {               
+			if(n%i==0) 
+				System.out.print(n/i + " ");	
+		}
+	}
+
+- Binary exponentiation
+	long power(int a, int b) {
+		// binary Exponentiation
+		long res = 1;
+		while(b > 0) {
+			if((b&1)==1)
+				res=(res*a)%MOD ;
+			a = (a*a)%MOD;
+			b = b>>1;
+		}
+		return res;
+	}
+
+- Inverse
+	long modInverse(long a) {
+	        return power(a, MOD - 2);
+	}
+--------------------------------------------- Bitwise operation ---------------------------------------------------
+
+- check if kth bit is set [if((n&(1<<(k-1)))!=0)]
+
+- fast exponentiation
+
+- check for power of 2 [Power of 2 has only one set bit, n&(n-1)==0 if n is the power of 2]
+
+- missing number from 1 to n [(1^2^3^4^…n)^(a[0]^a[1]^a[2]^…a[n-1])]
+
+- count set bits [Brian Kernigan's Algorithm - n&(n-1) --> turn offs the last set bit of the number n (right most) Due to the fact that last set bit of n is always off in (n-1)]
+	while(n>0) {
+		n = (n&(n-1));
+		count++;
+	}
+ 
+- find two odd occuring number*
+
+- addition subtraction without using + or  -,   also divide and 
+
+public int getSum(int a, int b) {
+	if (a == 0) return b;
+	if (b == 0) return a;
+	while (b != 0) {
+		int carry = a & b;
+		a = a ^ b;
+		b = carry << 1;
+	}
+	
+	return a;
+}
+
+public int getSubtract(int a, int b) {
+	while (b != 0) {
+		int borrow = (~a) & b;
+		a = a ^ b;
+		b = borrow << 1;
+	}
+	
+	return a;
+}
+
+- Generate power set [Time complexity - O(n*2^n)]
+	ArrayList<String>ans=new ArrayList<>();
+	for (int num = 0; num < (1 << n); num++) {
+		String sub = "";
+		for (int i = 0; i < n; i++) {
+			//check if the ith bit is set or not
+			if ((num & (1 << i))!=0) {
+				sub += s.charAt(i);
+			}
+		}
+		if (sub.length() > 0) {
+			ans.add(sub);
+		}
+	}
+
+-------------------------------------------------- Recursion -------------------------------------------------------------
+
+- rod cutting
+- tower of hanoi
+- Josephus problem
+- subset
+
+--------------------------------------------------- Arrays ---------------------------------------------------------------
+
+- Rotate array by k places
+	k=k%n;
+	reverse(a,0,k-1);
+	reverse(a,k,n-1);
+	reverse(a,0,n-1); 
+
