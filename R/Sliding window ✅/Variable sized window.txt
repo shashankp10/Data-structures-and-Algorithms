@@ -1,0 +1,26 @@
+long[] printFirstNegativeInteger(long a[], int n, int k){
+        long[] res = new long[n-k+1];
+  	int idx = 0;
+        Queue<Integer> q = new LinkedList<>();
+        for(int i = 0; i < k; i++){
+            if(a[i] < 0){
+                q.add((int) a[i]);
+            }
+        }
+        for(int i = k; i < n; i++){
+        	if(q.isEmpty()){
+            	res[idx++] = 0L;
+            }else {
+            	res[idx++] = q.peek();
+            	if(a[(int)(i-k)]==q.peek())
+            		q.poll();
+            }
+        	if(a[i] < 0){
+                q.add((int) a[i]);
+            }
+        	
+        }
+        if(!q.isEmpty())
+        	res[idx] = q.peek();
+        return res;
+}

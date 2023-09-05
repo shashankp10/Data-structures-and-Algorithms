@@ -1,0 +1,74 @@
+		Code template 
+	
+	for( 0 --> k-1){
+		- add element in the window
+	}
+
+	- do the calculation on k size window
+	- add to the answer
+
+	for( k --> n){
+		- remove i-kth element from the window
+		- add ith element to the window
+		- do the calculation on k size window
+		- add to the answer
+	}
+
+
+-----------------------------------------------------------------
+
+Q1. Max/Min sum of a subarray of size K
+
+Q2. First negative in array of size K
+
+long[] printFirstNegativeInteger(long a[], int n, int k){
+        long[] res = new long[n-k+1];
+  	int idx = 0;
+        Queue<Integer> q = new LinkedList<>();
+        for(int i = 0; i < k; i++){
+            if(a[i] < 0){
+                q.add((int) a[i]);
+            }
+        }
+        for(int i = k; i < n; i++){
+        	if(q.isEmpty()){
+            	res[idx++] = 0L;
+            }else {
+            	res[idx++] = q.peek();
+            	if(a[(int)(i-k)]==q.peek())
+            		q.poll();
+            }
+        	if(a[i] < 0){
+                q.add((int) a[i]);
+            }
+        	
+        }
+        if(!q.isEmpty())
+        	res[idx] = q.peek();
+        return res;
+}
+
+Q3. Count occurrences of anagram
+
+
+Q4. Max of all subarray of size K
+
+	List<Integer> max_of_subarrays(int arr[], int n, int k){
+    		List<Integer> res = new ArrayList<>();
+      		PriorityQueue<Integer> maxHeap = 
+			new PriorityQueue<>(Collections.reverseOrder());
+    		for (int i = 0; i < k; i++) {
+			maxHeap.add(arr[i]);
+    		}
+    		res.add(maxHeap.peek());
+    		for (int i = k; i < arr.length; i++) {						maxHeap.remove(arr[i-k]);
+			maxHeap.add(arr[i]);
+			res.add(maxHeap.peek());
+    		}
+    		return res;
+	}
+
+	Time complexity - O(n*log k)
+	Space complexity - O(k)
+
+Q5. Max of min of every window size [Good Question]
