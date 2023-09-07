@@ -1,4 +1,4 @@
---------------------- General code snippet --------------------		
+			Code snippet	
 
 		while(j < size){
 
@@ -20,6 +20,7 @@
 		}
 
 		return ans;
+ 	----------------------------------------------------------------------------
 
 Q1. Longest/Smallest subarray with sum K
 	
