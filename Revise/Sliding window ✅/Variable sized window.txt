@@ -1,26 +1,70 @@
-long[] printFirstNegativeInteger(long a[], int n, int k){
-        long[] res = new long[n-k+1];
-  	int idx = 0;
-        Queue<Integer> q = new LinkedList<>();
-        for(int i = 0; i < k; i++){
-            if(a[i] < 0){
-                q.add((int) a[i]);
-            }
-        }
-        for(int i = k; i < n; i++){
-        	if(q.isEmpty()){
-            	res[idx++] = 0L;
-            }else {
-            	res[idx++] = q.peek();
-            	if(a[(int)(i-k)]==q.peek())
-            		q.poll();
-            }
-        	if(a[i] < 0){
-                q.add((int) a[i]);
-            }
-        	
-        }
-        if(!q.isEmpty())
-        	res[idx] = q.peek();
-        return res;
-}
+--------------------- General code snippet --------------------		
+
+		while(j < size){
+
+			calculation
+
+			if(condition < k)
+				j++;
+			else if(condition == k){
+				ans = calculation;
+				j++;
+			} else if(condition > k){
+				while(condition > k){
+					remove calculation for i
+					i++;
+				}
+				j++;
+			}			
+
+		}
+
+		return ans;
+
+Q1. Longest/Smallest subarray with sum K
+	
+	int lenOfLongSubarr (int[] nums, int n, int k) {
+        	int i = 0, sum = 0, maxLength = 0;
+  		Map<Integer, Integer> map = new HashMap<>();
+  		while(i < n) {
+  			sum+=nums[i];
+  			if(sum == k)
+  				maxLength = Math.max(maxLength, i + 1);
+
+  			int rem = sum - k;
+  			if(map.containsKey(rem)) {
+  				maxLength = Math.max(maxLength, i-map.get(rem));
+  			}
+  			if(!map.containsKey(sum)) {
+  				map.put(sum, i);
+  			}
+  			i++;
+  		}
+  		return maxLength;
+    	}
+	Time complexity - O(n) if collisions are less otherwise O(n^2)  [HashMap]
+			  O(n*log n) [TreeMap]
+
+	--> It can be further be optimized if array don't have negative integers
+
+	https://takeuforward.org/data-structure/longest-subarray-with-given-sum-k/
+
+
+Q2. Longest substring with K unique characters 
+	
+--> use map.size() as a condition
+--> increase or decrease the character count from the map accordingly.
+
+Q3. Longest substring with (no repeating character/ all unique characters)
+	condition 1 : map.size()==j-i+1 (length of subarray) [all unique characters]
+	condition 2 : map.size() < j-i+1 [array contains repreating character]
+	condition 3 : map.size() > j-i+1 [this cannot be reached]
+
+Q4. Pick toys
+
+--> K = 2
+similar Question : https://leetcode.com/problems/fruit-into-baskets/description/
+	missing an edge case
+
+Q5. Minimum window substring [The Question of sliding window] 
+	https://leetcode.com/problems/minimum-window-substring/submissions/1042974953/
